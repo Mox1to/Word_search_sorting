@@ -1,0 +1,86 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <stdio.h>
+#include <string>
+#include <locale>
+#include <stdlib.h>
+#include <Windows.h>
+#include <clocale>
+
+#define pb push_back
+
+using namespace std;
+
+void del(string aim, vector<string>& t, vector<string>& res)
+{
+    for (int i = 0; i < t.size(); i++)
+    {
+        if (t[i].find(aim) != string::npos)
+        {
+            res.pb(t[i]);
+            t.erase(t.begin() + i);
+        }
+    }
+}
+bool cmp1(string a, string b)
+{
+    for (int i = 0; i < min(a.size(), b.size()); i++)
+    {
+        if (a[i] != b[i])
+        {
+            return a[i] < b[i];
+        }
+    }
+    return a.size() < b.size();
+}
+bool cmp2(string a, string b)
+{
+    return a.size() < b.size();
+}
+int main()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    cout << "Введите количество фраз: " << endl;
+    int n;
+    cin >> n;
+    basic_string<char> it;
+    vector<string> t(n);
+    vector<string> res;
+    getchar();
+    cout << "Введите фразы" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        getline(cin, t[i]);
+    }
+    cout << "Введите содержащиеся слово: " << endl;
+    string aim;
+    cin >> aim;
+    del(aim, t, res); // вызов функции del с аргументами
+    cout << "Сортировать по: \n1)Алфавиту \n2)Длине фразы\n" << endl;
+    int id;
+    cin >> id;
+    if (id = 1)
+    {
+        sort(t.begin(), t.end(), cmp1);
+        sort(res.begin(), res.end(), cmp1);
+    }
+    else
+    {
+        sort(t.begin(), t.end(), cmp2);
+        sort(res.begin(), res.end(), cmp2);
+    }
+    cout << "\nПервый массив: " << endl;
+    for (auto it : t)
+    {
+        cout << it << endl;
+    }
+    cout << "\nВторой массив: " << endl;
+    for (auto it : res)
+    {
+        cout << it << endl;
+    }
+    return 0;
+}
